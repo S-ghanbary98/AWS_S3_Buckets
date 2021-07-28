@@ -46,9 +46,55 @@ Once all dependencies have been set up type `aws configure` where you will short
 
 Once all the required information has been typed in you can successfully create a bucket and files as well as perform CRUD.
 
-## Creating an S3 Bucket
+### Creating an S3 Bucket
 - `aws s3 mb s3://bucket_name` where mb stands for 'make bucket'.
-## Uploading Files to bucket
+### Uploading Files to bucket
 - `aws s3 cp test.txt s3://bucket_name` where cp stands for 'copy'.
-## Download file from bucket
-- `sudo aws s3 cp s3://bucket_name/test.txt new_name`
+### Download file from bucket
+- `sudo aws s3 cp s3://bucket_name/test.txt new_name`.
+
+# Boto3 
+
+- Locate folder were `credentials` and `config` files are on the localhost. Create a .py file that will contain the code.
+
+### Printing all S3 buckets
+```python
+import boto3
+s3 = boto3.client('s3')
+response = s3.list_buckets()
+
+print('Existing buckets:')
+for bucket in response['Buckets']:
+    print(f'  {bucket["Name"]}')
+```
+
+### Creating a S3 Bucket
+```python
+s3_client = boto3.client('s3')
+s3_client.create_bucket(Bucket=bucket_name)
+```
+
+### Downloading file from S3 Bucket
+```python
+s3_client = boto3.client('s3')
+s3_client.download_file(bucket_name, object_name_in_bucket, file_name)
+```
+
+### Uploading a file to a S3 Bucket 
+```python
+s3_client = boto3.client('s3')
+s3_client.upload_file(file_name, bucket, object_name)
+```
+
+### Deleting Object in S3 bucket
+
+```python
+s3_client = boto3.client('s3')
+s3_client.delete_object(Bucket=bucket_name, object_name)
+```
+
+### Deleting S3 Bucket 
+```python
+s3_client = boto3.client('s3')
+s3_client.delete_bucket(Bucket=bucket_name)
+```
