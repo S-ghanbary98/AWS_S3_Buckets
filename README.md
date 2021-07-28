@@ -56,7 +56,8 @@ Once all the required information has been typed in you can successfully create 
 # Boto3 
 
 - Locate folder were `credentials` and `config` files are on the localhost. Create a .py file that will contain the code.
-
+- Usually found in ~./aws so to enter type `cd ~./aws`.
+- If non-existent then create one along with credentials and config files, via `mkdir .aws` and `nano files_`.
 ### Printing all S3 buckets
 ```python
 import boto3
